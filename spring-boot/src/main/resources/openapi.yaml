@@ -1,0 +1,99 @@
+openapi: 3.0.2
+info:
+  title: Project Tracking and Monitoring
+  version: "0.1"
+servers:
+- url: /
+tags:
+- description: Work Package data management
+  name: wp
+- description: Project Schema data management
+  name: schema
+- description: Activity management
+  name: activity
+- description: Project data management
+  name: project
+- description: Milestone data management
+  name: milestone
+paths:
+  /wp:
+    get:
+      parameters:
+      - description: Work Package ID
+        explode: true
+        in: query
+        name: wpid
+        required: false
+        schema:
+          type: string
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/WorkPackage'
+                type: array
+          description: Success
+      summary: Search for Work Packages
+      tags:
+      - wp
+      x-accepts: application/json
+      x-tags:
+      - tag: wp
+components:
+  schemas:
+    WorkPackage:
+      description: Object representing a Work Package
+      example:
+        wpid: wpid
+        description: description
+        id: 0
+      properties:
+        id:
+          type: integer
+        wpid:
+          type: string
+        description:
+          type: string
+      required:
+      - id
+      - wpid
+      title: Work Package
+      type: object
+    WorkSchema:
+      description: Object representing a Work Schema
+      properties:
+        id:
+          type: integer
+        schemaid:
+          type: string
+        description:
+          type: string
+      required:
+      - id
+      - schemaid
+      title: Work Schema
+      type: object
+    Activity:
+      description: Object representing an Activity
+      properties:
+        id:
+          type: integer
+        title:
+          type: string
+        projectwp:
+          type: string
+        startdate:
+          type: string
+        enddate:
+          type: string
+      required:
+      - enddate
+      - id
+      - projectwp
+      - startdate
+      - title
+      title: Activity
+      type: object
