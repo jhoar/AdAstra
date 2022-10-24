@@ -1,32 +1,402 @@
-openapi: 3.0.2
+openapi: "3.0.2"
 info:
-  title: Project Tracking and Monitoring
+  title: Ad Astra
+  description: Project Tracking and Monitoring
   version: "0.1"
+  contact:
+    name: Application support
+    email: John.Hoar@esa.int
+  license:
+    name: ESA Public License Type 2 version 2.4
+    url: https://essr.esa.int/license/european-space-agency-public-license-v2-4-weak-copyleft-type-2
 servers:
 - url: /
 tags:
 - description: Work Package data management
-  name: wp
+  name: WorkPackage
 - description: Project Schema data management
-  name: schema
-- description: Activity management
-  name: activity
+  name: WorkSchema
 - description: Project data management
-  name: project
-- description: Milestone data management
-  name: milestone
+  name: Project
+
 paths:
+
+# Project
+  /project:
+    get:
+      tags:
+        - Project
+      summary: Get Project
+      operationId: getProject
+      parameters:
+        - in: query
+          name: id
+          schema:
+            type: integer
+          description: Filter by record ID
+          required: false
+        - in: query
+          name: projectId
+          schema:
+            type: string
+          description: Filter by projectId
+          required: false
+        - in: query
+          name: title
+          schema:
+            type: string
+          description: Filter by title
+          required: false
+        - in: query
+          name: description
+          schema:
+            type: string
+          description: Filter by description
+          required: false
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/Project'
+                type: array
+          description: Success
+        "400":
+          $ref: '#/components/responses/RequestError'
+        "500":
+          $ref: '#/components/responses/ServerError'
+    post:
+      tags:
+        - Project
+      summary: Create Project
+      operationId: createProject
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                title:
+                  type: string
+                projectId:
+                  type: string
+                description:
+                  type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/Project'
+                type: object
+          description: Success
+        "400":
+          $ref: '#/components/responses/RequestError'
+        "500":
+          $ref: '#/components/responses/ServerError'
+
+  /project/{id}:
+    get:
+      tags:
+        - Project
+      summary: Get Project
+      operationId: getProjectById
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: integer
+          description: Record ID
+          required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/Project'
+                type: object
+          description: Success
+        "400":
+          $ref: '#/components/responses/RequestError'
+        "500":
+          $ref: '#/components/responses/ServerError'
+    patch:
+      tags:
+        - Project
+      summary: Update Project
+      operationId: updateProject
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: integer
+          description: Record ID
+          required: true
+        - in: query
+          name: title
+          schema:
+            type: string
+          description: Update Title
+          required: false
+        - in: query
+          name: projectId
+          schema:
+            type: string
+          description: Update Project ID
+          required: false
+        - in: query
+          name: description
+          schema:
+            type: string
+          description: Update Description
+          required: false
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/Project'
+                type: object
+          description: Success
+        "400":
+          $ref: '#/components/responses/RequestError'
+        "500":
+          $ref: '#/components/responses/ServerError'
+    delete:
+      tags:
+        - Project
+      summary: Delete Project
+      operationId: deleteProject
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: integer
+          description: Record ID
+          required: true
+      responses:
+        "200":
+          description: Success
+        "400":
+          $ref: '#/components/responses/RequestError'
+        "500":
+          $ref: '#/components/responses/ServerError'
+
+# Work Schema
+  /schema:
+    get:
+      tags:
+        - WorkSchema
+      summary: Get Work Schema
+      operationId: getWorkSchema
+      parameters:
+        - in: query
+          name: id
+          schema:
+            type: integer
+          description: Filter by Record ID
+          required: false
+        - in: query
+          name: title
+          schema:
+            type: string
+          description: Filter by Title
+          required: false
+        - in: query
+          name: schemaId
+          schema:
+            type: string
+          description: Filter by schemaId
+          required: false
+        - in: query
+          name: description
+          schema:
+            type: string
+          description: Filter by Description
+          required: false
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/WorkSchema'
+                type: array
+          description: Success
+        "400":
+          $ref: '#/components/responses/RequestError'
+        "500":
+          $ref: '#/components/responses/ServerError'
+    post:
+      tags:
+        - WorkSchema
+      summary: Create Work Schema
+      operationId: createWorkSchema
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                title:
+                  type: string
+                schemaId:
+                  type: string
+                description:
+                  type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/WorkSchema'
+                type: object
+          description: Success
+        "400":
+          $ref: '#/components/responses/RequestError'
+        "500":
+          $ref: '#/components/responses/ServerError'
+
+  /schema/{id}:
+    get:
+      tags:
+        - WorkSchema
+      summary: Get Work Schema
+      operationId: getSchemaById
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: integer
+          description: Record ID
+          required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/WorkSchema'
+                type: object
+          description: Success
+        "400":
+          $ref: '#/components/responses/RequestError'
+        "500":
+          $ref: '#/components/responses/ServerError'
+    patch:
+      tags:
+        - WorkSchema
+      summary: Update Work Schema
+      operationId: updateWorkSchema
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: integer
+          description: record ID
+          required: true
+        - in: query
+          name: title
+          schema:
+            type: string
+          description: Update Title
+          required: false
+        - in: query
+          name: schemaId
+          schema:
+            type: string
+          description: Update Schema ID
+          required: false
+        - in: query
+          name: description
+          schema:
+            type: string
+          description: Update Description
+          required: false
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/WorkSchema'
+                type: object
+          description: Success
+        "400":
+          $ref: '#/components/responses/RequestError'
+        "500":
+          $ref: '#/components/responses/ServerError'
+    delete:
+      tags:
+        - WorkSchema
+      summary: Delete Work Schema
+      operationId: deleteWorkSchema
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: integer
+          description: Record ID
+          required: true
+      responses:
+        "200":
+          description: Success
+        "400":
+          $ref: '#/components/responses/RequestError'
+        "500":
+          $ref: '#/components/responses/ServerError'
+
+# Work Package
   /wp:
     get:
+      tags:
+        - WorkPackage
+      summary: Get Work Package
+      operationId: getWorkPackage
       parameters:
-      - description: Work Package ID
-        explode: true
-        in: query
-        name: wpid
-        required: false
-        schema:
-          type: string
-        style: form
+        - in: query
+          name: id
+          schema:
+            type: integer
+          description: Filter by Record ID
+          required: false
+        - in: query
+          name: title
+          schema:
+            type: string
+          description: Filter by Title
+          required: false
+        - in: query
+          name: wpId
+          schema:
+            type: string
+          description: Filter by wpId
+          required: false
+        - in: query
+          name: projectId
+          schema:
+            type: string
+          description: Filter by projectId
+          required: false
+        - in: query
+          name: schemaId
+          schema:
+            type: string
+          description: Filter by schemaId
+          required: false
+        - in: query
+          name: description
+          schema:
+            type: string
+          description: Update Description
+          required: false
       responses:
         "200":
           content:
@@ -36,64 +406,222 @@ paths:
                   $ref: '#/components/schemas/WorkPackage'
                 type: array
           description: Success
-      summary: Search for Work Packages
+        "400":
+          $ref: '#/components/responses/RequestError'
+        "500":
+          $ref: '#/components/responses/ServerError'
+    post:
       tags:
-      - wp
-      x-accepts: application/json
-      x-tags:
-      - tag: wp
+        - WorkPackage
+      summary: Create Work Package
+      operationId: createWorkPackage
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                title:
+                  type: string
+                wpId:
+                  type: string
+                projectId:
+                  type: string
+                schemaId:
+                  type: string
+                description:
+                  type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/WorkPackage'
+                type: object
+          description: Success
+        "400":
+          $ref: '#/components/responses/RequestError'
+        "500":
+          $ref: '#/components/responses/ServerError'
+
+  /wp/{id}:
+    get:
+      tags:
+        - WorkPackage
+      summary: Get Work Package
+      operationId: getWorkPackageById
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: integer
+          description: Record ID
+          required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/WorkPackage'
+                type: object
+          description: Success
+        "400":
+          $ref: '#/components/responses/RequestError'
+        "500":
+          $ref: '#/components/responses/ServerError'
+    patch:
+      tags:
+        - WorkPackage
+      summary: Update Work Package
+      operationId: updateWorkPackage
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: integer
+          description: record ID
+          required: true
+        - in: query
+          name: title
+          schema:
+            type: string
+          description: Update title
+          required: false
+        - in: query
+          name: wpId
+          schema:
+            type: string
+          description: Update wpId
+          required: false
+        - in: query
+          name: projectId
+          schema:
+            type: string
+          description: Update projectId
+          required: false
+        - in: query
+          name: schemaId
+          schema:
+            type: string
+          description: Update schemaId
+          required: false
+        - in: query
+          name: description
+          schema:
+            type: string
+          description: Update Description
+          required: false
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/WorkPackage'
+                type: object
+          description: Success
+        "400":
+          $ref: '#/components/responses/RequestError'
+        "500":
+          $ref: '#/components/responses/ServerError'
+    delete:
+      tags:
+        - WorkPackage
+      summary: Delete Work Package
+      operationId: deleteWorkPackage
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: integer
+          description: Record ID
+          required: true
+      responses:
+        "200":
+          description: Success
+        "400":
+          $ref: '#/components/responses/RequestError'
+        "500":
+          $ref: '#/components/responses/ServerError'
+
 components:
   schemas:
-    WorkPackage:
-      description: Object representing a Work Package
-      example:
-        wpid: wpid
-        description: description
-        id: 0
-      properties:
-        id:
-          type: integer
-        wpid:
-          type: string
-        description:
-          type: string
-      required:
-      - id
-      - wpid
-      title: Work Package
+    Project:
+      title: Project
+      description: A Project is the highest level of work organisation
       type: object
-    WorkSchema:
-      description: Object representing a Work Schema
-      properties:
-        id:
-          type: integer
-        schemaid:
-          type: string
-        description:
-          type: string
-      required:
-      - id
-      - schemaid
-      title: Work Schema
-      type: object
-    Activity:
-      description: Object representing an Activity
       properties:
         id:
           type: integer
         title:
           type: string
-        projectwp:
+        description:
           type: string
-        startdate:
-          type: string
-        enddate:
+        projectId:
           type: string
       required:
-      - enddate
-      - id
-      - projectwp
-      - startdate
-      - title
-      title: Activity
+        - id
+        - title
+        - projectId
+    WorkPackage:
+      title: Work Package
+      description: A Work Package is the description of work that is performed as part of a Project
       type: object
+      properties:
+        id:
+          type: integer
+        title:
+          type: string
+        description:
+          type: string
+        wpId:
+          type: string
+        projectId:
+          type: string
+        schemaId:
+          type: string
+      required:
+      - id
+      - title
+      - wpId
+      - projectId
+    WorkSchema:
+      title: Work Schema
+      description: Object representing a Work Schema
+      type: object
+      properties:
+        id:
+          type: integer
+        title:
+          type: string
+        description:
+          type: string
+        schemaId:
+          type: string
+      required:
+      - id
+      - schemaId
+      - title
+  responses:
+    RequestError:
+      description: Invalid request
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              message:
+                type: string
+    ServerError:
+      description: Server error
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              message:
+                type: string
+
