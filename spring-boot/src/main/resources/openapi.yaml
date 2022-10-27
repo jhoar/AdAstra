@@ -77,7 +77,7 @@ paths:
           application/json:
             schema:
               type: object
-              properties:
+              properties: # How to specify mandatory fields?
                 title:
                   type: string
                 projectId:
@@ -97,6 +97,7 @@ paths:
           $ref: '#/components/responses/RequestError'
         "500":
           $ref: '#/components/responses/ServerError'
+          # projectId already exists
 
   /project/{id}:
     get:
@@ -124,6 +125,8 @@ paths:
           $ref: '#/components/responses/RequestError'
         "500":
           $ref: '#/components/responses/ServerError'
+        # id does not exist
+
     patch:
       tags:
         - Project
@@ -134,25 +137,25 @@ paths:
           name: id
           schema:
             type: integer
-          description: Record ID
+          description: record ID
           required: true
         - in: query
           name: title
           schema:
             type: string
-          description: Update Title
+          description: Update title
           required: false
         - in: query
           name: projectId
           schema:
             type: string
-          description: Update Project ID
+          description: Update projectId
           required: false
         - in: query
           name: description
           schema:
             type: string
-          description: Update Description
+          description: Update description
           required: false
       responses:
         "200":
@@ -167,6 +170,9 @@ paths:
           $ref: '#/components/responses/RequestError'
         "500":
           $ref: '#/components/responses/ServerError'
+        # id does not exist
+        # projectId already exists
+
     delete:
       tags:
         - Project
@@ -177,7 +183,7 @@ paths:
           name: id
           schema:
             type: integer
-          description: Record ID
+          description: record ID
           required: true
       responses:
         "200":
@@ -186,6 +192,67 @@ paths:
           $ref: '#/components/responses/RequestError'
         "500":
           $ref: '#/components/responses/ServerError'
+        # id does not exist
+        # work packages referencing this project exist
+
+  /project/{id}/wp:
+    get:
+      tags:
+        - Project
+      summary: Get Work Packages for a Project
+      operationId: getProjectWPs
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: integer
+          description: Record ID
+          required: true
+        - in: query
+          name: id
+          schema:
+            type: integer
+          description: Filter by Record ID
+          required: false
+        - in: query
+          name: title
+          schema:
+            type: string
+          description: Filter by Title
+          required: false
+        - in: query
+          name: wpId
+          schema:
+            type: string
+          description: Filter by wpId
+          required: false
+        - in: query
+          name: schemaId
+          schema:
+            type: string
+          description: Filter by schemaId
+          required: false
+        - in: query
+          name: description
+          schema:
+            type: string
+          description: Filter by Description
+          required: false
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/WorkPackage'
+                type: array
+          description: Success
+        "400":
+          $ref: '#/components/responses/RequestError'
+        "500":
+          $ref: '#/components/responses/ServerError'
+        # id does not exist
+
 
 # Work Schema
   /schema:
@@ -395,7 +462,7 @@ paths:
           name: description
           schema:
             type: string
-          description: Update Description
+          description: Filter by Description
           required: false
       responses:
         "200":

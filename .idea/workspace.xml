@@ -5,11 +5,18 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="8b34ebcd-b588-4c02-80a1-2565f712479e" name="Changes" comment="Build Project">
+      <change afterPath="$PROJECT_DIR$/docs/Activity.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/spring-boot/src/main/java/esa/sci/ops/adastra/spring/ProjectApiImplementation.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/spring-boot/src/main/java/esa/sci/ops/adastra/spring/ProjectRepository.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/spring-boot/src/main/resources/application.properties" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/spring-boot/src/main/resources/schema.sql" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/encodings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/docs/Design.md" beforeDir="false" afterPath="$PROJECT_DIR$/docs/Design.md" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/spring-boot/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/spring-boot/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/spring-boot/src/main/java/esa/sci/ops/adastra/spring/WpApiImplementation.java" beforeDir="false" afterPath="$PROJECT_DIR$/spring-boot/src/main/java/esa/sci/ops/adastra/spring/WpApiImplementation.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/spring-boot/src/main/java/esa/sci/ops/adastra/spring/Application.java" beforeDir="false" afterPath="$PROJECT_DIR$/spring-boot/src/main/java/esa/sci/ops/adastra/spring/Application.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/spring-boot/src/main/java/esa/sci/ops/adastra/spring/WpApiImplementation.java" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/spring-boot/src/main/resources/openapi.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/spring-boot/src/main/resources/openapi.yaml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -20,6 +27,7 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
+        <option value="Interface" />
         <option value="Class" />
       </list>
     </option>
@@ -79,6 +87,15 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration name="Unnamed" type="Application" factoryName="Application" nameIsGenerated="true">
+      <option name="ALTERNATIVE_JRE_PATH" value="zulu-17" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="true" />
+      <option name="MAIN_CLASS_NAME" value="esa.sci.ops.dbtest.DbtestApplication" />
+      <module name="dbtest" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name=" [clean,install]" type="MavenRunConfiguration" factoryName="Maven" nameIsGenerated="true">
       <MavenSettings>
         <option name="myGeneralSettings" />
@@ -131,6 +148,7 @@
       <method v="2" />
     </configuration>
     <list>
+      <item itemvalue="Application.Unnamed" />
       <item itemvalue="Application.Application" />
       <item itemvalue="Maven. [clean,install]" />
       <item itemvalue="Maven.spring-boot [compile]" />
@@ -165,7 +183,14 @@
       <option name="project" value="LOCAL" />
       <updated>1666107858104</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="Build Project">
+      <created>1666619564363</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1666619564363</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
