@@ -5,19 +5,17 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="8b34ebcd-b588-4c02-80a1-2565f712479e" name="Changes" comment="Build Project">
-      <change afterPath="$PROJECT_DIR$/docs/Activity.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/spring-boot/src/main/java/esa/sci/ops/adastra/spring/ProjectApiImplementation.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/spring-boot/src/main/java/esa/sci/ops/adastra/spring/ProjectRepository.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/spring-boot/src/main/resources/application.properties" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/spring-boot/src/main/resources/schema.sql" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/encodings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/jpa-buddy.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/spring-boot/src/main/java/esa/sci/ops/adastra/spring/dto/ProjectDTO.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/Design.md" beforeDir="false" afterPath="$PROJECT_DIR$/docs/Design.md" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/spring-boot/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/spring-boot/pom.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/spring-boot/src/main/java/esa/sci/ops/adastra/spring/Application.java" beforeDir="false" afterPath="$PROJECT_DIR$/spring-boot/src/main/java/esa/sci/ops/adastra/spring/Application.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/spring-boot/src/main/java/esa/sci/ops/adastra/spring/WpApiImplementation.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/spring-boot/src/main/java/esa/sci/ops/adastra/spring/ProjectApiImplementation.java" beforeDir="false" afterPath="$PROJECT_DIR$/spring-boot/src/main/java/esa/sci/ops/adastra/spring/ProjectApiImplementation.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/spring-boot/src/main/java/esa/sci/ops/adastra/spring/ProjectRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/spring-boot/src/main/java/esa/sci/ops/adastra/spring/ProjectRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/spring-boot/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/spring-boot/src/main/resources/application.properties" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/spring-boot/src/main/resources/openapi.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/spring-boot/src/main/resources/openapi.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/spring-boot/src/main/resources/schema.sql" beforeDir="false" afterPath="$PROJECT_DIR$/spring-boot/src/main/resources/schema.sql" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -29,11 +27,28 @@
       <list>
         <option value="Interface" />
         <option value="Class" />
+        <option value="com.haulmont.jpb.JpaEntity" />
       </list>
     </option>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="JpbToolWindowState">
+    <option name="myId2FirstActivated">
+      <map>
+        <entry key="com.haulmont.jpb.jpaInspector" value="true" />
+        <entry key="com.haulmont.jpb.jpaPalette" value="true" />
+        <entry key="com.haulmont.jpb.jpaStructure" value="true" />
+      </map>
+    </option>
+    <option name="myId2Visible">
+      <map>
+        <entry key="com.haulmont.jpb.jpaInspector" value="false" />
+        <entry key="com.haulmont.jpb.jpaPalette" value="false" />
+        <entry key="com.haulmont.jpb.jpaStructure" value="true" />
+      </map>
+    </option>
   </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
@@ -77,9 +92,10 @@
     <configuration name="Application" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="esa.sci.ops.adastra.spring.Application" />
       <module name="spring-boot" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/spring-boot" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="esa.sci.ops.adastra.spring.*" />
+          <option name="PATTERN" value="esa.sci.ops.adastra.spring.dto.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
@@ -190,7 +206,14 @@
       <option name="project" value="LOCAL" />
       <updated>1666619564363</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="Build Project">
+      <created>1666866916601</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1666866916601</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -207,5 +230,21 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Build Project" />
     <option name="LAST_COMMIT_MESSAGE" value="Build Project" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>jar://$MAVEN_REPOSITORY$/io/r2dbc/r2dbc-spi/0.9.1.RELEASE/r2dbc-spi-0.9.1.RELEASE.jar!/io/r2dbc/spi/ConnectionUrlParser.class</url>
+          <line>34</line>
+          <option name="timeStamp" value="1" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>jar://$MAVEN_REPOSITORY$/io/r2dbc/r2dbc-spi/0.9.1.RELEASE/r2dbc-spi-0.9.1.RELEASE.jar!/io/r2dbc/spi/ConnectionUrlParser.class</url>
+          <line>55</line>
+          <option name="timeStamp" value="2" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
 </project>
