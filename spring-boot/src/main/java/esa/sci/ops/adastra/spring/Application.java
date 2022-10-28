@@ -1,5 +1,6 @@
 package esa.sci.ops.adastra.spring;
 
+import esa.sci.ops.adastra.spring.dto.DTOMapper;
 import esa.sci.ops.adastra.spring.dto.ProjectDTO;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -39,6 +40,11 @@ public class Application {
             log.info("ProjectDTO found with findById(1L):");
             log.info("--------------------------------");
             log.info(project.get().toString());
+            log.info("");
+
+            log.info("Project from ProjectDTO found with findById(1L):");
+            log.info("--------------------------------");
+            log.info(DTOMapper.dtoToProject(project.get()).toString());
             log.info("");
 
         };
