@@ -4,13 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="8b34ebcd-b588-4c02-80a1-2565f712479e" name="Changes" comment="JPA/Hibernate working">
-      <change afterPath="$PROJECT_DIR$/spring-boot/src/main/java/esa/sci/ops/adastra/spring/dto/DTOMapper.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/spring-boot/src/main/java/esa/sci/ops/adastra/spring/dto/WorkPackageDTO.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/spring-boot/src/main/java/esa/sci/ops/adastra/spring/dto/WorkSchemaDTO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/jpa-buddy.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/jpa-buddy.xml" afterDir="false" />
+    <list default="true" id="8b34ebcd-b588-4c02-80a1-2565f712479e" name="Changes" comment="Add DTOs">
+      <change afterPath="$PROJECT_DIR$/spring-boot/src/test/java/esa/sci/ops/adastra/spring/ProjectApiImplementationTest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/spring-boot/src/test/resources/application.properties" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/spring-boot/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/spring-boot/pom.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/spring-boot/src/main/java/esa/sci/ops/adastra/spring/Application.java" beforeDir="false" afterPath="$PROJECT_DIR$/spring-boot/src/main/java/esa/sci/ops/adastra/spring/Application.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -24,6 +21,7 @@
         <option value="Interface" />
         <option value="Class" />
         <option value="com.haulmont.jpb.JpaEntity" />
+        <option value="JUnit5 Test Class" />
       </list>
     </option>
   </component>
@@ -60,8 +58,10 @@
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary": "JUnit5",
+    "com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit5": "",
     "jdk.selected.JAVA_MODULE": "zulu-17",
-    "last_opened_file_path": "C:/Users/jhoar/Development/AdAstra/spring-boot/src/main/java/esa/sci/ops/adastra/spring/dto",
+    "last_opened_file_path": "C:/Users/jhoar/Development/AdAstra/spring-boot/src/test/resources",
     "project.structure.last.edited": "Modules",
     "project.structure.proportion": "0.15",
     "project.structure.side.proportion": "0.2"
@@ -74,6 +74,7 @@
 }]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\jhoar\Development\AdAstra\spring-boot\src\test\resources" />
       <recent name="C:\Users\jhoar\Development\AdAstra\spring-boot\src\main\java\esa\sci\ops\adastra\spring\dto" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
@@ -82,12 +83,18 @@
       <recent name="C:\Users\jhoar\Development\AdAstra\docs" />
       <recent name="C:\Users\jhoar\Development\AdAstra" />
     </key>
+    <key name="CreateTestDialog.Recents.Supers">
+      <recent name="" />
+    </key>
     <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
       <recent name="esa.sci.ops.adastra.spring" />
       <recent name="esa.sci.ops.spring" />
     </key>
+    <key name="CreateTestDialog.RecentsKey">
+      <recent name="esa.sci.ops.adastra.spring" />
+    </key>
   </component>
-  <component name="RunManager" selected="Application.Application">
+  <component name="RunManager" selected="JUnit.ProjectApiImplementationTest">
     <configuration name="Application" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="esa.sci.ops.adastra.spring.Application" />
       <module name="spring-boot" />
@@ -107,6 +114,21 @@
       <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="true" />
       <option name="MAIN_CLASS_NAME" value="esa.sci.ops.dbtest.DbtestApplication" />
       <module name="dbtest" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="ProjectApiImplementationTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="spring-boot" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="esa.sci.ops.adastra.spring.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="esa.sci.ops.adastra.spring" />
+      <option name="MAIN_CLASS_NAME" value="esa.sci.ops.adastra.spring.ProjectApiImplementationTest" />
+      <option name="TEST_OBJECT" value="class" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -165,11 +187,13 @@
     <list>
       <item itemvalue="Application.Unnamed" />
       <item itemvalue="Application.Application" />
+      <item itemvalue="JUnit.ProjectApiImplementationTest" />
       <item itemvalue="Maven. [clean,install]" />
       <item itemvalue="Maven.spring-boot [compile]" />
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="JUnit.ProjectApiImplementationTest" />
         <item itemvalue="Application.Application" />
         <item itemvalue="Maven.spring-boot [compile]" />
       </list>
@@ -219,7 +243,14 @@
       <option name="project" value="LOCAL" />
       <updated>1666946801033</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="Add DTOs">
+      <created>1666960152963</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1666960152963</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -236,7 +267,8 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Build Project" />
     <MESSAGE value="JPA/Hibernate working" />
-    <option name="LAST_COMMIT_MESSAGE" value="JPA/Hibernate working" />
+    <MESSAGE value="Add DTOs" />
+    <option name="LAST_COMMIT_MESSAGE" value="Add DTOs" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
