@@ -1,0 +1,1 @@
+INSERT INTO project(projectId, title, description) VALUES ("34", "Euclid SOC", "Euclid Science Operations")
