@@ -4,10 +4,17 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="8b34ebcd-b588-4c02-80a1-2565f712479e" name="Changes" comment="Unit test setup">
-      <change afterPath="$PROJECT_DIR$/spring-boot/src/test/resources/test.sql" afterDir="false" />
+    <list default="true" id="8b34ebcd-b588-4c02-80a1-2565f712479e" name="Changes" comment="Complete units tests for Project">
+      <change afterPath="$PROJECT_DIR$/spring-boot/src/test/java/esa/sci/ops/adastra/spring/ProjectRepositoryTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/spring-boot/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/spring-boot/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/spring-boot/src/main/java/esa/sci/ops/adastra/spring/Application.java" beforeDir="false" afterPath="$PROJECT_DIR$/spring-boot/src/main/java/esa/sci/ops/adastra/spring/Application.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/spring-boot/src/main/java/esa/sci/ops/adastra/spring/ProjectApiImplementation.java" beforeDir="false" afterPath="$PROJECT_DIR$/spring-boot/src/main/java/esa/sci/ops/adastra/spring/ProjectApiImplementation.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/spring-boot/src/main/java/esa/sci/ops/adastra/spring/ProjectRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/spring-boot/src/main/java/esa/sci/ops/adastra/spring/ProjectRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/spring-boot/src/main/java/esa/sci/ops/adastra/spring/dto/DTOMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/spring-boot/src/main/java/esa/sci/ops/adastra/spring/dto/DTOMapper.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/spring-boot/src/main/java/esa/sci/ops/adastra/spring/dto/ProjectDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/spring-boot/src/main/java/esa/sci/ops/adastra/spring/dto/ProjectDTO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/spring-boot/src/main/java/esa/sci/ops/adastra/spring/dto/WorkPackageDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/spring-boot/src/main/java/esa/sci/ops/adastra/spring/dto/WorkPackageDTO.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/spring-boot/src/test/java/esa/sci/ops/adastra/spring/ProjectApiImplementationTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/spring-boot/src/test/java/esa/sci/ops/adastra/spring/ProjectApiImplementationTest.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -39,13 +46,16 @@
     <option name="myId2Visible">
       <map>
         <entry key="com.haulmont.jpb.jpaInspector" value="false" />
-        <entry key="com.haulmont.jpb.jpaPalette" value="true" />
-        <entry key="com.haulmont.jpb.jpaStructure" value="true" />
+        <entry key="com.haulmont.jpb.jpaPalette" value="false" />
+        <entry key="com.haulmont.jpb.jpaStructure" value="false" />
       </map>
     </option>
   </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
+  </component>
+  <component name="ProblemsViewState">
+    <option name="selectedTabId" value="ProjectErrors" />
   </component>
   <component name="ProjectId" id="2GIwYHpXlwwX0yM7NZpvNivfftQ" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
@@ -94,7 +104,7 @@
       <recent name="esa.sci.ops.adastra.spring" />
     </key>
   </component>
-  <component name="RunManager" selected="JUnit.ProjectApiImplementationTest">
+  <component name="RunManager" selected="JUnit.ProjectApiImplementationTest.createProject_clash">
     <configuration name="Unnamed" type="Application" factoryName="Application" nameIsGenerated="true">
       <option name="ALTERNATIVE_JRE_PATH" value="zulu-17" />
       <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="true" />
@@ -119,7 +129,7 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="ProjectApiImplementationTest.createProject" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="ProjectApiImplementationTest.createProject_clash" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="spring-boot" />
       <extension name="coverage">
         <pattern>
@@ -129,13 +139,13 @@
       </extension>
       <option name="PACKAGE_NAME" value="esa.sci.ops.adastra.spring" />
       <option name="MAIN_CLASS_NAME" value="esa.sci.ops.adastra.spring.ProjectApiImplementationTest" />
-      <option name="METHOD_NAME" value="createProject" />
+      <option name="METHOD_NAME" value="createProject_clash" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="ProjectApiImplementationTest.deleteProject" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="ProjectApiImplementationTest.getProjectById_fail" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="spring-boot" />
       <extension name="coverage">
         <pattern>
@@ -145,23 +155,7 @@
       </extension>
       <option name="PACKAGE_NAME" value="esa.sci.ops.adastra.spring" />
       <option name="MAIN_CLASS_NAME" value="esa.sci.ops.adastra.spring.ProjectApiImplementationTest" />
-      <option name="METHOD_NAME" value="deleteProject" />
-      <option name="TEST_OBJECT" value="method" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="ProjectApiImplementationTest.getProjectById" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="spring-boot" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="esa.sci.ops.adastra.spring.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="esa.sci.ops.adastra.spring" />
-      <option name="MAIN_CLASS_NAME" value="esa.sci.ops.adastra.spring.ProjectApiImplementationTest" />
-      <option name="METHOD_NAME" value="getProjectById" />
+      <option name="METHOD_NAME" value="getProjectById_fail" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
@@ -178,6 +172,22 @@
       <option name="PACKAGE_NAME" value="esa.sci.ops.adastra.spring" />
       <option name="MAIN_CLASS_NAME" value="esa.sci.ops.adastra.spring.ProjectApiImplementationTest" />
       <option name="METHOD_NAME" value="updateProject" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="ProjectApiImplementationTest.updateProject_clash" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="spring-boot" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="esa.sci.ops.adastra.spring.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="esa.sci.ops.adastra.spring" />
+      <option name="MAIN_CLASS_NAME" value="esa.sci.ops.adastra.spring.ProjectApiImplementationTest" />
+      <option name="METHOD_NAME" value="updateProject_clash" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
@@ -212,19 +222,19 @@
     <list>
       <item itemvalue="Application.Unnamed" />
       <item itemvalue="JUnit.ProjectApiImplementationTest" />
-      <item itemvalue="JUnit.ProjectApiImplementationTest.createProject" />
-      <item itemvalue="JUnit.ProjectApiImplementationTest.deleteProject" />
-      <item itemvalue="JUnit.ProjectApiImplementationTest.getProjectById" />
+      <item itemvalue="JUnit.ProjectApiImplementationTest.createProject_clash" />
+      <item itemvalue="JUnit.ProjectApiImplementationTest.getProjectById_fail" />
       <item itemvalue="JUnit.ProjectApiImplementationTest.updateProject" />
+      <item itemvalue="JUnit.ProjectApiImplementationTest.updateProject_clash" />
       <item itemvalue="Maven. [clean,install]" />
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="JUnit.ProjectApiImplementationTest" />
-        <item itemvalue="JUnit.ProjectApiImplementationTest.createProject" />
+        <item itemvalue="JUnit.ProjectApiImplementationTest.createProject_clash" />
+        <item itemvalue="JUnit.ProjectApiImplementationTest.updateProject_clash" />
         <item itemvalue="JUnit.ProjectApiImplementationTest.updateProject" />
-        <item itemvalue="JUnit.ProjectApiImplementationTest.getProjectById" />
-        <item itemvalue="JUnit.ProjectApiImplementationTest.deleteProject" />
+        <item itemvalue="JUnit.ProjectApiImplementationTest" />
+        <item itemvalue="JUnit.ProjectApiImplementationTest.getProjectById_fail" />
       </list>
     </recent_temporary>
   </component>
@@ -286,7 +296,14 @@
       <option name="project" value="LOCAL" />
       <updated>1667119116639</updated>
     </task>
-    <option name="localTasksCounter" value="8" />
+    <task id="LOCAL-00008" summary="Unit test setup">
+      <created>1667296570305</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1667296570305</updated>
+    </task>
+    <option name="localTasksCounter" value="9" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -305,7 +322,8 @@
     <MESSAGE value="JPA/Hibernate working" />
     <MESSAGE value="Add DTOs" />
     <MESSAGE value="Unit test setup" />
-    <option name="LAST_COMMIT_MESSAGE" value="Unit test setup" />
+    <MESSAGE value="Complete units tests for Project" />
+    <option name="LAST_COMMIT_MESSAGE" value="Complete units tests for Project" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

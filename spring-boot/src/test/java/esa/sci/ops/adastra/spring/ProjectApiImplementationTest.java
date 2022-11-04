@@ -1,79 +1,225 @@
 package esa.sci.ops.adastra.spring;
 
 import esa.sci.ops.adastra.spring.dto.ProjectDTO;
-import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.BeforeEach;
+import esa.sci.ops.adastra.spring.generated.model.Project;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.core.ParameterizedTypeReference;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.MediaType;
+import org.springframework.test.web.reactive.server.EntityExchangeResult;
+import org.springframework.test.web.reactive.server.WebTestClient;
+import reactor.core.publisher.Mono;
 
-import java.util.Collection;
+import java.util.List;
 import java.util.Optional;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
-@DataJpaTest
+@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 class ProjectApiImplementationTest {
+
+    @Autowired
+    private ProjectApiImplementation controller;
+
+    @Autowired
+    private WebTestClient webTestClient;
 
     @Autowired
     private ProjectRepository repository;
 
-    @Test
-    void createProject() {
-        ProjectDTO p1 = repository.save(new ProjectDTO().projectId("35").title("Euclid SOC").description("Euclid Science Operations"));
-        assertNotNull(p1);
-        Long id = p1.getId();
-
-        Optional<ProjectDTO> p2 = repository.findById(id);
-        assertEquals(true, p2.isPresent());
-        assertEquals("35", p2.get().getProjectId());
+    @AfterEach
+    public void clean() {
+        repository.deleteAll();
     }
+
+    ParameterizedTypeReference<List<Project>> typeRef = new ParameterizedTypeReference<>() {};
+
+    private List<Project> getProjectsFromResponse(WebTestClient.ResponseSpec exchange) {
+        WebTestClient.BodySpec<List<Project>, ?> listBodySpec = exchange.expectBody(typeRef);
+        EntityExchangeResult<List<Project>> listEntityExchangeResult = listBodySpec.returnResult();
+        return listEntityExchangeResult.getResponseBody();
+    }
+
+    @Test
+    void createProject_valid() {
+
+        Project newProject = new Project().projectId("36").title("Test");
+
+        WebTestClient.ResponseSpec exchange = webTestClient.post()
+                .uri("/project")
+                .header(HttpHeaders.ACCEPT, MediaType.APPLICATION_JSON_VALUE)
+                .body(Mono.just(newProject), Project.class)
+                .exchange();
+
+        exchange.expectStatus().is2xxSuccessful();
+
+        List<Project> projects = getProjectsFromResponse(exchange);
+        assertEquals(1, projects.size());
+        assertEquals("36", projects.get(0).getProjectId());
+
+        boolean found = false;
+        for (ProjectDTO dto: repository.findAll()) {
+            if (dto.getProjectId().equals("36") && dto.getTitle().equals("Test")) {
+                found = true;
+                break;
+            }
+        }
+
+        assertTrue(found);
+
+    }
+
+    @Test
+    void createProject_clash() {
+        ProjectDTO test_again = repository.save(new ProjectDTO().projectId("41").title("Test again"));
+        Optional<ProjectDTO> check = repository.findById(test_again.getId());
+        assertTrue(check.isPresent());
+
+        Project newProject = new Project().projectId("41").title("Test");
+
+        WebTestClient.ResponseSpec exchange = webTestClient.post()
+                .uri("/project")
+                .header(HttpHeaders.ACCEPT, MediaType.APPLICATION_JSON_VALUE)
+                .body(Mono.just(newProject), Project.class)
+                .exchange();
+
+        exchange.expectStatus().is5xxServerError();
+
+        List<Project> projects = getProjectsFromResponse(exchange);
+        assertEquals(0, projects.size());
+
+    }
+
+    @Test
+    void createProject_missingId() {
+
+        Project newProject = new Project().title("Test");
+
+        WebTestClient.ResponseSpec exchange = webTestClient.post()
+                .uri("/project")
+                .header(HttpHeaders.ACCEPT, MediaType.APPLICATION_JSON_VALUE)
+                .body(Mono.just(newProject), Project.class)
+                .exchange();
+
+        exchange.expectStatus().is4xxClientError();
+
+    }
+
 
     @Test
     void deleteProject() {
-        ProjectDTO p1 = repository.save(new ProjectDTO().projectId("35").title("Euclid SOC").description("Euclid Science Operations"));
 
-        assertNotNull(p1);
-        Long id = p1.getId();
+        ProjectDTO test_again = repository.save(new ProjectDTO().projectId("37").title("Test again"));
+        Optional<ProjectDTO> check = repository.findById(test_again.getId());
+        assertTrue(check.isPresent());
 
-        Optional<ProjectDTO> p2 = repository.findById(id);
-        assertEquals(true, p2.isPresent());
-        assertEquals(id, p2.get().getId());
+        webTestClient.delete()
+                .uri("/project/" + test_again.getId() )
+                .header(HttpHeaders.ACCEPT, MediaType.APPLICATION_JSON_VALUE)
+                .exchange();
 
-        repository.delete(p1);
-
-        Optional<ProjectDTO> p3 = repository.findById(id);
-        assertTrue(p3.isEmpty());
+        Optional<ProjectDTO> byId = repository.findById(test_again.getId());
+        assertTrue(byId.isEmpty());
 
     }
 
     @Test
-    void getProjectFindAll() {
-        ProjectDTO p1 = repository.save(new ProjectDTO().projectId("35").title("Euclid SOC").description("Euclid Science Operations"));
-        ProjectDTO p2 = repository.save(new ProjectDTO().projectId("36").title("Euclid SOC").description("Euclid Science Operations"));
+    void getProject_noFilter() {
 
-        int count = 0;
-        for (ProjectDTO customer : repository.findAll()) {
-            count++;
-        }
-        assertEquals(2, count);
+        ProjectDTO test_again = repository.save(new ProjectDTO().projectId("41").title("Test again"));
+        Optional<ProjectDTO> check = repository.findById(test_again.getId());
+        assertTrue(check.isPresent());
+
+        ProjectDTO test_again1 = repository.save(new ProjectDTO().projectId("42").title("Test again"));
+        Optional<ProjectDTO> check1 = repository.findById(test_again1.getId());
+        assertTrue(check1.isPresent());
+
+        WebTestClient.ResponseSpec exchange = webTestClient.get()
+                .uri("/project/")
+                .header(HttpHeaders.ACCEPT, MediaType.APPLICATION_JSON_VALUE)
+                .exchange();
+
+        exchange.expectStatus().is2xxSuccessful();
+
+        assertEquals(2, getProjectsFromResponse(exchange).size());
     }
+
+    @Test
+    void getProject_noResults() {
+
+        ProjectDTO test_again = repository.save(new ProjectDTO().projectId("39").title("Test again"));
+        Optional<ProjectDTO> check = repository.findById(test_again.getId());
+        assertTrue(check.isPresent());
+
+        ProjectDTO test_again1 = repository.save(new ProjectDTO().projectId("40").title("Test again"));
+        Optional<ProjectDTO> check1 = repository.findById(test_again1.getId());
+        assertTrue(check1.isPresent());
+
+        WebTestClient.ResponseSpec exchange = webTestClient.get()
+                .uri("/project/?id=500")
+                .header(HttpHeaders.ACCEPT, MediaType.APPLICATION_JSON_VALUE)
+                .exchange();
+
+        exchange.expectStatus().is2xxSuccessful();
+
+        assertEquals(0, getProjectsFromResponse(exchange).size());
+    }
+
+    @Test
+    void getProject_byId() {
+
+        ProjectDTO test_again = repository.save(new ProjectDTO().projectId("38").title("Test again"));
+        Optional<ProjectDTO> check = repository.findById(test_again.getId());
+        assertTrue(check.isPresent());
+
+        WebTestClient.ResponseSpec exchange = webTestClient.get()
+                .uri("/project/?id=" + test_again.getId() )
+                .header(HttpHeaders.ACCEPT, MediaType.APPLICATION_JSON_VALUE)
+                .exchange();
+
+        exchange.expectStatus().is2xxSuccessful();
+
+        assertEquals(1, getProjectsFromResponse(exchange).size());
+    }
+
 
     @Test
     void getProjectById() {
-        ProjectDTO p1 = repository.save(new ProjectDTO().projectId("35").title("Euclid SOC").description("Euclid Science Operations"));
+        ProjectDTO test_again = repository.save(new ProjectDTO().projectId("38").title("Test again"));
+        Optional<ProjectDTO> check = repository.findById(test_again.getId());
+        assertTrue(check.isPresent());
 
-        assertNotNull(p1);
-        Long id = p1.getId();
+        WebTestClient.ResponseSpec exchange = webTestClient.get()
+                .uri("/project/" + test_again.getId() )
+                .header(HttpHeaders.ACCEPT, MediaType.APPLICATION_JSON_VALUE)
+                .exchange();
 
-        Optional<ProjectDTO> byId = repository.findById(id);
-        assertEquals(true, byId.isPresent());
+        exchange.expectStatus().is2xxSuccessful();
 
-        ProjectDTO projectDTO = byId.get();
-        assertNotNull(projectDTO);
-        assertEquals(id, projectDTO.getId());
+        assertEquals(1, getProjectsFromResponse(exchange).size());
     }
+
+    @Test
+    void getProjectById_fail() {
+        ProjectDTO test_again = repository.save(new ProjectDTO().projectId("38").title("Test again"));
+        Optional<ProjectDTO> check = repository.findById(test_again.getId());
+        assertTrue(check.isPresent());
+
+        WebTestClient.ResponseSpec exchange = webTestClient.get()
+                .uri("/project/500" + test_again.getId() )
+                .header(HttpHeaders.ACCEPT, MediaType.APPLICATION_JSON_VALUE)
+                .exchange();
+
+        exchange.expectStatus().is2xxSuccessful();
+
+        assertEquals(0, getProjectsFromResponse(exchange).size());
+
+    }
+
 
     @Test
     void getProjectWPs() {
@@ -81,26 +227,43 @@ class ProjectApiImplementationTest {
 
     @Test
     void updateProject() {
+        ProjectDTO test_again = repository.save(new ProjectDTO().projectId("38").title("Test again"));
+        Optional<ProjectDTO> check = repository.findById(test_again.getId());
+        assertTrue(check.isPresent());
 
-        ProjectDTO p1 = repository.save(new ProjectDTO().projectId("35").title("Euclid SOC").description("Euclid Science Operations"));
+        WebTestClient.ResponseSpec exchange = webTestClient.patch()
+                .uri("/project/" + test_again.getId() + "/?projectId=42" )
+                .header(HttpHeaders.ACCEPT, MediaType.APPLICATION_JSON_VALUE)
+                .exchange();
 
-        assertNotNull(p1);
-        Long id = p1.getId();
+        exchange.expectStatus().is2xxSuccessful();
 
-        p1.setTitle("Updated");
-
-        ProjectDTO p2 = repository.save(p1);
-
-        assertNotNull(p2);
-        assertEquals("Updated", p2.getTitle());
-
-        Optional<ProjectDTO> byId = repository.findById(p2.getId());
-        assertEquals(true, byId.isPresent());
-
-        ProjectDTO projectDTO = byId.get();
-        assertNotNull(projectDTO);
-        assertEquals(p1.getId(), projectDTO.getId());
-        assertEquals("Updated", projectDTO.getTitle());
+        List<Project> projects = getProjectsFromResponse(exchange);
+        assertEquals(1, projects.size());
+        assertEquals("42", projects.get(0).getProjectId());
 
     }
+
+    @Test
+    void updateProject_clash() {
+        ProjectDTO test_again = repository.save(new ProjectDTO().projectId("41").title("Test again"));
+        Optional<ProjectDTO> check = repository.findById(test_again.getId());
+        assertTrue(check.isPresent());
+
+        ProjectDTO test_again1 = repository.save(new ProjectDTO().projectId("42").title("Test again"));
+        Optional<ProjectDTO> check1 = repository.findById(test_again1.getId());
+        assertTrue(check1.isPresent());
+
+        WebTestClient.ResponseSpec exchange = webTestClient.patch()
+                .uri("/project/" + test_again.getId() + "/?projectId=42" )
+                .header(HttpHeaders.ACCEPT, MediaType.APPLICATION_JSON_VALUE)
+                .exchange();
+
+        exchange.expectStatus().is5xxServerError();
+
+        List<Project> projects = getProjectsFromResponse(exchange);
+        assertEquals(0, projects.size());
+
+    }
+
 }

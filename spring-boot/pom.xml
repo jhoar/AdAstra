@@ -39,15 +39,16 @@
             <artifactId>jaxb-api</artifactId>
             <version>2.3.1</version>
         </dependency>
+        <!-- https://mvnrepository.com/artifact/io.swagger.core.v3/swagger-core -->
+        <dependency>
+            <groupId>io.swagger.core.v3</groupId>
+            <artifactId>swagger-core</artifactId>
+            <version>2.2.4</version>
+        </dependency>
         <dependency>
             <groupId>io.swagger.core.v3</groupId>
             <artifactId>swagger-annotations</artifactId>
             <version>2.2.4</version>
-        </dependency>
-        <dependency>
-            <groupId>io.projectreactor</groupId>
-            <artifactId>reactor-core</artifactId>
-            <version>3.4.24</version>
         </dependency>
         <dependency>
             <groupId>org.openapitools</groupId>
@@ -64,6 +65,21 @@
             <artifactId>modelmapper</artifactId>
             <version>3.1.0</version>
         </dependency>
+        <!-- https://mvnrepository.com/artifact/javax.servlet/servlet-api -->
+        <dependency>
+            <groupId>javax.servlet</groupId>
+            <artifactId>servlet-api</artifactId>
+            <version>2.5</version>
+            <scope>provided</scope>
+        </dependency>
+        <!-- https://mvnrepository.com/artifact/org.json/json -->
+        <dependency>
+            <groupId>org.json</groupId>
+            <artifactId>json</artifactId>
+            <version>20220924</version>
+        </dependency>
+
+
     </dependencies>
 
     <build>
@@ -84,16 +100,13 @@
                             <generatorName>spring</generatorName>
                             <apiPackage>esa.sci.ops.adastra.spring.generated.api</apiPackage>
                             <modelPackage>esa.sci.ops.adastra.spring.generated.model</modelPackage>
-                            <supportingFilesToGenerate>
-                                ApiUtil.java
-                            </supportingFilesToGenerate>
                             <configOptions>
                                 <openApiNullable>true</openApiNullable>
                                 <controllerPackage>esa.sci.ops.adastra.spring.generated.controller</controllerPackage>
                                 <delegatePattern>true</delegatePattern>
                                 <test>junit</test>
-								<reactive>true</reactive>
-                                <useOptional>true</useOptional>
+								<reactive>false</reactive>
+                                <useOptional>false</useOptional>
                             </configOptions>
                         </configuration>
                     </execution>

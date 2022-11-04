@@ -70,4 +70,14 @@ public class ProjectDTO {
                 '}';
     }
 
+    @SuppressWarnings("unused")
+    public String toJSON() {
+        return "{ " +
+                "\"id\" : " + id + "," +
+                "\"projectId\" : \"" + projectId + "\" ," +
+                "\"title\" : \"" +  title + "\" ," +
+                "\"description\" : \"" + description + "\"}";
+    }
+
+
 }

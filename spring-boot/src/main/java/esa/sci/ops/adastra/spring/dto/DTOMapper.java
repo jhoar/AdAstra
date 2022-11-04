@@ -7,8 +7,9 @@ import org.modelmapper.ModelMapper;
 
 public class DTOMapper {
 
-    private static ModelMapper modelMapper = new ModelMapper();
+    private static final ModelMapper modelMapper = new ModelMapper();
 
+    @SuppressWarnings("unused")
     public static ProjectDTO projectToDTO(Project project) {
         return modelMapper.map(project, ProjectDTO.class);
     }
@@ -17,18 +18,22 @@ public class DTOMapper {
         return modelMapper.map(projectDTO, Project.class);
     }
 
+    @SuppressWarnings("unused")
     public static WorkPackageDTO workPackageToDTO(WorkPackage workPackage) {
         return modelMapper.map(workPackage, WorkPackageDTO.class);
     }
 
+    @SuppressWarnings("unused")
     public static WorkPackage dtoToWorkPackage(WorkPackageDTO workPackageDTO) {
         return modelMapper.map(workPackageDTO, WorkPackage.class);
     }
 
+    @SuppressWarnings("unused")
     public static WorkSchemaDTO workSchemaToDTO(WorkSchema workSchema) {
         return modelMapper.map(workSchema, WorkSchemaDTO.class);
     }
 
+    @SuppressWarnings("unused")
     public static WorkSchema dtoToWorkSchema(WorkSchemaDTO workSchemaDTO) {
         return modelMapper.map(workSchemaDTO, WorkSchema.class);
     }

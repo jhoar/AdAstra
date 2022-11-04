@@ -21,10 +21,12 @@ public class WorkPackageDTO {
     @Column(name = "wp_id", nullable = false, unique = true)
     private String wpId;
 
+    @SuppressWarnings("unused")
     public String getWpId() {
         return wpId;
     }
 
+    @SuppressWarnings("unused")
     public void setWpId(String wpId) {
         this.wpId = wpId;
     }
@@ -88,6 +90,7 @@ public class WorkPackageDTO {
         return this;
     }
 
+    @SuppressWarnings("unused")
     public WorkPackageDTO wpId(String wpId) {
         this.wpId = wpId;
         return this;
