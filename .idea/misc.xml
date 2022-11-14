@@ -18,6 +18,7 @@
     <option name="ignoredFiles">
       <set>
         <option value="$PROJECT_DIR$/dbtest/pom.xml" />
+        <option value="$PROJECT_DIR$/engine/pom.xml" />
       </set>
     </option>
   </component>
